@@ -7,7 +7,7 @@ class Shaker {
         const closeBtn = document.querySelector("#closeBtn");
         let isStartShake = false;
         let shakeIndex = 0;
-        // 再次强调 IOS 13.3 需要用户触发，再能开启摇一摇
+        // 再次強調 IOS 13.3 需要用戶觸發，再能開啟搖一搖
         startBtn?.addEventListener("touchend", () => {
             if (isStartShake) return;
             isStartShake = true;
@@ -107,7 +107,7 @@ class Shaker {
                 })
                 .catch(() => errCb("用戶未允許權限"));
         } else {
-            // 其他支持加速度检测的系统
+            // 其他支持加速度檢測的系統
             const timer = setTimeout(() => errCb("用戶未開啟權限"), 1000);
             window.addEventListener("devicemotion", (e) => clearTimeout(timer), { once: true });
             window.addEventListener("devicemotion", cb);
