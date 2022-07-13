@@ -23,7 +23,26 @@ var Shaker = (function () {
         });
     }
     Shaker.prototype.addShake = function () {
-        var toShake = this.throttle(this.shake);
+        var maxRange = 30;
+        var minRange = 10;
+        var isShake = false;
+        var lastX = 0;
+        var lastY = 0;
+        var lastZ = 0;
+        var toShake = this.throttle(function (e) {
+            var _a = e.acceleration, x = _a.x, y = _a.y, z = _a.z;
+            var range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
+            if (range > maxRange) {
+                isShake = true;
+            }
+            if (range < minRange && isShake) {
+                alert("您進行了搖一搖");
+                isShake = false;
+            }
+            lastX = x;
+            lastY = y;
+            lastZ = z;
+        });
         this.shakeEvent.push(toShake);
         this.setDeviceMotion(toShake, function (errMessage) { return alert(errMessage); });
         return this.shakeEvent.length - 1;
@@ -50,26 +69,6 @@ var Shaker = (function () {
                 timer = 0;
             }, interval);
         };
-    };
-    Shaker.prototype.shake = function (e) {
-        var maxRange = 30;
-        var minRange = 10;
-        var isShake = false;
-        var lastX = 0;
-        var lastY = 0;
-        var lastZ = 0;
-        var _a = e.acceleration, x = _a.x, y = _a.y, z = _a.z;
-        var range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-        if (range > maxRange) {
-            isShake = true;
-        }
-        if (range < minRange && isShake) {
-            alert("您進行了搖一搖");
-            isShake = false;
-        }
-        lastX = x;
-        lastY = y;
-        lastZ = z;
     };
     Shaker.prototype.setDeviceMotion = function (cb, errCb) {
         if (!window.DeviceMotionEvent) {

@@ -27,7 +27,28 @@ class Shaker {
      * @return {*} shakeIndex 開啟的第幾個搖一搖功能的索引，用來刪除監聽
      */
     addShake(): number {
-        const toShake = this.throttle(this.shake);
+        const maxRange = 30; //當用戶的兩次加速度差值大於這個幅度，判定用戶進行了搖一搖功能
+        const minRange = 10; //當用戶的兩次加速度差值小於這個幅度，判定用戶停止搖動手機
+        let isShake = false; //記錄用戶是否搖動手機
+        let lastX = 0;
+        let lastY = 0;
+        let lastZ = 0;
+        const toShake = this.throttle((e: DeviceMotionEvent) => {
+            const { x, y, z } = e.acceleration as any;
+            const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
+            if (range > maxRange) {
+                //用户进行了摇一摇
+                isShake = true;
+            }
+            if (range < minRange && isShake) {
+                // 停止摇一摇
+                alert("您進行了搖一搖");
+                isShake = false;
+            }
+            lastX = x;
+            lastY = y;
+            lastZ = z;
+        });
         this.shakeEvent.push(toShake);
         this.setDeviceMotion(toShake, (errMessage: any) => alert(errMessage));
         return this.shakeEvent.length - 1; //返回該次搖一搖處理的索引
@@ -55,34 +76,6 @@ class Shaker {
                 timer = 0;
             }, interval);
         };
-    }
-
-    /**
-     * @description 搖一搖核心
-     * @param {DeviceMotionEvent} e
-     * @memberof Shaker
-     */
-    shake(e: DeviceMotionEvent): void {
-        const maxRange = 30; //當用戶的兩次加速度差值大於這個幅度，判定用戶進行了搖一搖功能
-        const minRange = 10; //當用戶的兩次加速度差值小於這個幅度，判定用戶停止搖動手機
-        let isShake = false; //記錄用戶是否搖動手機
-        let lastX = 0;
-        let lastY = 0;
-        let lastZ = 0;
-        const { x, y, z } = e.acceleration as any;
-        const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-        if (range > maxRange) {
-            //用戶進行了搖一搖
-            isShake = true;
-        }
-        if (range < minRange && isShake) {
-            // 停止摇一摇
-            alert("您進行了搖一搖");
-            isShake = false;
-        }
-        lastX = x;
-        lastY = y;
-        lastZ = z;
     }
 
     /**
