@@ -92,7 +92,7 @@
                     shakeIndex 开启的第几个摇一摇功能的索引，用来删除监听     
         */
         function addShake(cbShake) {
-            const maxRange = 60; //当用户的两次加速度差值大于这个幅度，判定用户进行了摇一摇功能
+            const maxRange = 30; //当用户的两次加速度差值大于这个幅度，判定用户进行了摇一摇功能
             const minRange = 10; //当用户的两次加速度差值小于这个幅度，判定用户停止摇动手机
             let isShake = false; //记录用户是否摇动手机
             let lastX = 0,
