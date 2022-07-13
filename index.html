@@ -15,7 +15,7 @@
     </head>
 
     <body>
-        搖一搖測試
+        <h1>搖一搖測試</h1>
     </body>
     <script>
         function shake() {
@@ -23,12 +23,14 @@
             let lastX = 0;
             let lastY = 0;
             let lastZ = 0;
+            const text = document.querySelector("h1");
             window.addEventListener("devicemotion", (e) => {
                 const { x, y, z } = e.acceleration;
                 const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
                 if (range > maxRange) {
                     //用戶進行了搖一搖
                     alert("您進行了搖一搖");
+                    text.textContent = `${x}_${y}_${y}`;
                 }
                 lastX = x;
                 lastY = y;
