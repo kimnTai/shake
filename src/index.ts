@@ -1,8 +1,8 @@
-class Shake {
+class Shaker {
     shakeEvent: any[] = [];
 
     constructor() {
-        // 调用摇一摇
+        // 調用搖一搖
         const startBtn = document.querySelector("#startBtn");
         const closeBtn = document.querySelector("#closeBtn");
         let isStartShake = false;
@@ -11,7 +11,7 @@ class Shake {
         startBtn?.addEventListener("touchend", () => {
             if (isStartShake) return;
             isStartShake = true;
-            alert("開啟搖一搖");
+            alert("開啟");
             shakeIndex = this.addShake();
         });
         closeBtn?.addEventListener("touchend", () => {
@@ -23,44 +23,26 @@ class Shake {
     }
 
     /**
-     * @description setDeviceMotion 添加陀螺仪监控
-     * @param {*} cb devicemotion的事件处理函数
-     * @param {*} errCb 不支持 devicemotion 时的处理回调
-     * @return {*}
+     * @description 添加搖一搖功能
+     * @return {*} shakeIndex 開啟的第幾個搖一搖功能的索引，用來刪除監聽
      */
-    setDeviceMotion(cb: any, errCb: any): any {
-        if (!window.DeviceMotionEvent) {
-            errCb("设备不支持DeviceMotion");
-            return;
-        }
-        if (typeof (DeviceMotionEvent as any).requestPermission === "function") {
-            // IOS 13
-            (DeviceMotionEvent as any)
-                .requestPermission()
-                .then((permissionState: string) => {
-                    if (permissionState === "granted") {
-                        window.addEventListener("devicemotion", cb);
-                    }
-                })
-                .catch(() => errCb("用户未允许权限"));
-        } else {
-            // 其他支持加速度检测的系统
-            const timer = setTimeout(() => errCb("用户未开启权限"), 1000);
-            window.addEventListener("devicemotion", (e) => clearTimeout(timer), { once: true });
-            window.addEventListener("devicemotion", cb);
-        }
+    addShake(): number {
+        const toShake = this.throttle(this.shake);
+        this.shakeEvent.push(toShake);
+        this.setDeviceMotion(toShake, (errMessage: any) => alert(errMessage));
+        return this.shakeEvent.length - 1; //返回該次搖一搖處理的索引
     }
 
     /**
-     * @description throttle 节流函数
-     * @param {*} fn 要节流的函数
-     * @param {number} [interval=200] 节流间隔时间
-     * @param {boolean} [start=true] 是否在节流开始时执行 (true在开始时执行，false在结束时执行)
-     * @return {*} 经过节流处理的函数
+     * @description throttle 節流函數
+     * @param {*} fn 要節流的函數
+     * @param {number} [interval=200] 節流間隔時間
+     * @param {boolean} [start=true] 是否在節流開始時執行 (true在開始時執行，false在結束時執行)
+     * @return {*} 經過節流處理的函數
      */
     throttle(fn: any, interval: number = 200, start: boolean = true): any {
         if (typeof fn !== "function") {
-            return console.error("请传入一个函数");
+            return console.error("請傳入一個函數");
         }
         let timer = 0;
         return (...arg: any) => {
@@ -76,38 +58,61 @@ class Shake {
     }
 
     /**
-     * @description 添加摇一摇功能
-     * @param {*} cbShake 类型 fn 当用户进行了摇一摇之后要做的事情
-     * @return {*} shakeIndex 开启的第几个摇一摇功能的索引，用来删除监听
+     * @description 搖一搖核心
+     * @param {DeviceMotionEvent} e
+     * @memberof Shaker
      */
-    addShake(): number {
-        const maxRange = 30; //当用户的两次加速度差值大于这个幅度，判定用户进行了摇一摇功能
-        const minRange = 10; //当用户的两次加速度差值小于这个幅度，判定用户停止摇动手机
-        let isShake = false; //记录用户是否摇动手机
+    shake(e: DeviceMotionEvent): void {
+        const maxRange = 30; //當用戶的兩次加速度差值大於這個幅度，判定用戶進行了搖一搖功能
+        const minRange = 10; //當用戶的兩次加速度差值小於這個幅度，判定用戶停止搖動手機
+        let isShake = false; //記錄用戶是否搖動手機
         let lastX = 0;
         let lastY = 0;
         let lastZ = 0;
+        const { x, y, z } = e.acceleration as any;
+        const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
+        if (range > maxRange) {
+            //用户进行了摇一摇
+            isShake = true;
+        }
+        if (range < minRange && isShake) {
+            // 停止摇一摇
+            alert("您进行了摇一摇");
+            isShake = false;
+        }
+        lastX = x;
+        lastY = y;
+        lastZ = z;
+    }
 
-        const toShake = this.throttle((e: any) => {
-            const { x, y, z } = e.acceleration;
-            const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-            if (range > maxRange) {
-                //用户进行了摇一摇
-                isShake = true;
-            }
-            if (range < minRange && isShake) {
-                // 停止摇一摇
-                alert("您进行了摇一摇");
-                isShake = false;
-            }
-            lastX = x;
-            lastY = y;
-            lastZ = z;
-        });
-        this.shakeEvent.push(toShake);
-        this.setDeviceMotion(toShake, (errMessage: any) => alert(errMessage));
-        return this.shakeEvent.length - 1; //返回该次摇一摇处理的索引
+    /**
+     * @description setDeviceMotion 添加陀螺仪监控
+     * @param {*} cb devicemotion 的事件處理函數
+     * @param {*} errCb 不支持 devicemotion 時的處理回調
+     * @return {*}
+     */
+    setDeviceMotion(cb: any, errCb: any): any {
+        if (!window.DeviceMotionEvent) {
+            errCb("設備不支持DeviceMotion");
+            return;
+        }
+        if (typeof (DeviceMotionEvent as any).requestPermission === "function") {
+            // IOS 13
+            (DeviceMotionEvent as any)
+                .requestPermission()
+                .then((permissionState: string) => {
+                    if (permissionState === "granted") {
+                        window.addEventListener("devicemotion", cb);
+                    }
+                })
+                .catch(() => errCb("用戶未允許權限"));
+        } else {
+            // 其他支持加速度检测的系统
+            const timer = setTimeout(() => errCb("用戶未開啟權限"), 1000);
+            window.addEventListener("devicemotion", (e) => clearTimeout(timer), { once: true });
+            window.addEventListener("devicemotion", cb);
+        }
     }
 }
 
-new Shake();
+new Shaker();
