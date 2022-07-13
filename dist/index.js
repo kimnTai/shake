@@ -7,14 +7,14 @@ var Shaker = (function () {
         var closeBtn = document.querySelector("#closeBtn");
         var isStartShake = false;
         var shakeIndex = 0;
-        startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("touchend", function () {
+        startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("pointerup", function () {
             if (isStartShake)
                 return;
             isStartShake = true;
             alert("開啟");
             shakeIndex = _this.addShake();
         });
-        closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("touchend", function () {
+        closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("pointerup", function () {
             if (!isStartShake)
                 return;
             isStartShake = false;

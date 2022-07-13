@@ -8,13 +8,13 @@ class Shaker {
         let isStartShake = false;
         let shakeIndex = 0;
         // 再次強調 IOS 13.3 需要用戶觸發，再能開啟搖一搖
-        startBtn?.addEventListener("touchend", () => {
+        startBtn?.addEventListener("pointerup", () => {
             if (isStartShake) return;
             isStartShake = true;
             alert("開啟");
             shakeIndex = this.addShake();
         });
-        closeBtn?.addEventListener("touchend", () => {
+        closeBtn?.addEventListener("pointerup", () => {
             if (!isStartShake) return;
             isStartShake = false;
             alert("關閉");
