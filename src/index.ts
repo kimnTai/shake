@@ -119,6 +119,7 @@ let shakeIndex: number;
 startBtn?.addEventListener("touchend", () => {
     if (isStartShake) return;
     isStartShake = true;
+    alert("開啟搖一搖");
     shakeIndex = addShake(() => {
         alert("您进行了摇一摇");
     });
@@ -126,5 +127,6 @@ startBtn?.addEventListener("touchend", () => {
 closeBtn?.addEventListener("touchend", () => {
     if (!isStartShake) return;
     isStartShake = false;
+    alert("關閉");
     removeShake(shakeIndex);
 });

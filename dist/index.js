@@ -92,6 +92,7 @@ startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("t
     if (isStartShake)
         return;
     isStartShake = true;
+    alert("開啟搖一搖");
     shakeIndex = addShake(function () {
         alert("您进行了摇一摇");
     });
@@ -100,5 +101,6 @@ closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("t
     if (!isStartShake)
         return;
     isStartShake = false;
+    alert("關閉");
     removeShake(shakeIndex);
 });
