@@ -64,7 +64,7 @@ var Shaker = (function () {
             isShake = true;
         }
         if (range < minRange && isShake) {
-            alert("您进行了摇一摇");
+            alert("您進行了搖一搖");
             isShake = false;
         }
         lastX = x;

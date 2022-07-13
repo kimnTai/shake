@@ -72,12 +72,12 @@ class Shaker {
         const { x, y, z } = e.acceleration as any;
         const range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
         if (range > maxRange) {
-            //用户进行了摇一摇
+            //用戶進行了搖一搖
             isShake = true;
         }
         if (range < minRange && isShake) {
             // 停止摇一摇
-            alert("您进行了摇一摇");
+            alert("您進行了搖一搖");
             isShake = false;
         }
         lastX = x;
