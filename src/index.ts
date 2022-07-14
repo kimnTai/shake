@@ -9,6 +9,24 @@ export default class ShakeController {
     //當用戶的兩次加速度差值小於這個幅度，判定用戶停止搖動手機
     minRange = 10;
 
+    constructor() {
+        // 調用搖一搖
+        const startBtn = document.querySelector("#startBtn");
+        const closeBtn = document.querySelector("#closeBtn");
+
+        let shakeIndex = 0;
+        // 再次強調 IOS 13.3 需要用戶觸發，再能開啟搖一搖
+        startBtn?.addEventListener("pointerup", () => {
+            alert("開啟");
+            this.addShake(() => {
+                alert("您進行了搖一搖");
+            });
+        });
+        closeBtn?.addEventListener("pointerup", () => {
+            alert("關閉");
+        });
+    }
+
     /**
      * @description 添加搖一搖功能
      * @param {*} callBack
@@ -100,23 +118,4 @@ export default class ShakeController {
     }
 }
 
-function init() {
-    // 調用搖一搖
-    const startBtn = document.querySelector("#startBtn");
-    const closeBtn = document.querySelector("#closeBtn");
-
-    let shakeIndex = 0;
-    // 再次強調 IOS 13.3 需要用戶觸發，再能開啟搖一搖
-    startBtn?.addEventListener("pointerup", () => {
-        alert("開啟");
-        this.addShake(() => {
-            alert("您進行了搖一搖");
-        });
-    });
-    closeBtn?.addEventListener("pointerup", () => {
-        alert("關閉");
-        window.removeEventListener("devicemotion", this.shakeEvent[shakeIndex]);
-    });
-}
-
-init();
+new ShakeController();
