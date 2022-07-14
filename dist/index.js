@@ -1,76 +1,58 @@
 "use strict";
-var Shaker = (function () {
-    function Shaker() {
-        var _this = this;
-        this.shakeEvent = [];
-        var startBtn = document.querySelector("#startBtn");
-        var closeBtn = document.querySelector("#closeBtn");
-        var isStartShake = false;
-        var shakeIndex = 0;
-        startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("pointerup", function () {
-            if (isStartShake)
-                return;
-            isStartShake = true;
-            alert("開啟");
-            shakeIndex = _this.addShake();
-        });
-        closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("pointerup", function () {
-            if (!isStartShake)
-                return;
-            isStartShake = false;
-            alert("關閉");
-            window.removeEventListener("devicemotion", _this.shakeEvent[shakeIndex]);
-        });
+Object.defineProperty(exports, "__esModule", { value: true });
+var ShakeController = (function () {
+    function ShakeController() {
+        this.maxRange = 30;
+        this.minRange = 10;
     }
-    Shaker.prototype.addShake = function () {
-        var maxRange = 30;
-        var minRange = 10;
+    ShakeController.prototype.addShake = function (callBack) {
+        var _this = this;
+        if (typeof callBack !== "function") {
+            return;
+        }
         var isShake = false;
         var lastX = 0;
         var lastY = 0;
         var lastZ = 0;
-        var toShake = this.throttle(function (e) {
+        var toShake = this._throttle(function (e) {
             var _a = e.acceleration, x = _a.x, y = _a.y, z = _a.z;
             var range = Math.abs(x - lastX) + Math.abs(y - lastY) + Math.abs(z - lastZ);
-            if (range > maxRange) {
+            if (range > _this.maxRange) {
                 isShake = true;
+                callBack();
             }
-            if (range < minRange && isShake) {
-                alert("您進行了搖一搖");
+            if (range < _this.minRange && isShake) {
                 isShake = false;
+                _this._removeShake(toShake);
             }
             lastX = x;
             lastY = y;
             lastZ = z;
         });
-        this.shakeEvent.push(toShake);
-        this.setDeviceMotion(toShake, function (errMessage) { return alert(errMessage); });
-        return this.shakeEvent.length - 1;
+        this._setDeviceMotion(toShake, function (errMessage) { return alert(errMessage); });
     };
-    Shaker.prototype.throttle = function (fn, interval, start) {
+    ShakeController.prototype._removeShake = function (toShake) {
+        window.removeEventListener("devicemotion", toShake);
+    };
+    ShakeController.prototype._throttle = function (fn) {
         var _this = this;
-        if (interval === void 0) { interval = 200; }
-        if (start === void 0) { start = true; }
         if (typeof fn !== "function") {
             return console.error("請傳入一個函數");
         }
         var timer = 0;
+        var interval = 200;
         return function () {
             var arg = [];
             for (var _i = 0; _i < arguments.length; _i++) {
                 arg[_i] = arguments[_i];
             }
-            if (timer) {
+            if (timer)
                 return;
-            }
-            start && fn.apply(_this, arg);
-            timer = setTimeout(function () {
-                !start && fn.apply(_this, arg);
-                timer = 0;
-            }, interval);
+            fn.apply(_this, arg);
+            timer = setTimeout(function () { return (timer = 0); }, interval);
         };
     };
-    Shaker.prototype.setDeviceMotion = function (cb, errCb) {
+    ShakeController.prototype._setDeviceMotion = function (cb, errCb) {
         if (!window.DeviceMotionEvent) {
             errCb("設備不支持DeviceMotion");
             return;
@@ -91,6 +73,23 @@ var Shaker = (function () {
             window.addEventListener("devicemotion", cb);
         }
     };
-    return Shaker;
+    return ShakeController;
 }());
-new Shaker();
+exports.default = ShakeController;
+function init() {
+    var _this = this;
+    var startBtn = document.querySelector("#startBtn");
+    var closeBtn = document.querySelector("#closeBtn");
+    var shakeIndex = 0;
+    startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("pointerup", function () {
+        alert("開啟");
+        _this.addShake(function () {
+            alert("您進行了搖一搖");
+        });
+    });
+    closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("pointerup", function () {
+        alert("關閉");
+        window.removeEventListener("devicemotion", _this.shakeEvent[shakeIndex]);
+    });
+}
+init();
