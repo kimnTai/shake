@@ -1,21 +1,15 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var ShakeController = (function () {
     function ShakeController() {
         var _this = this;
         this.maxRange = 30;
         this.minRange = 10;
         var startBtn = document.querySelector("#startBtn");
-        var closeBtn = document.querySelector("#closeBtn");
-        var shakeIndex = 0;
         startBtn === null || startBtn === void 0 ? void 0 : startBtn.addEventListener("pointerup", function () {
             alert("開啟");
             _this.addShake(function () {
                 alert("您進行了搖一搖");
             });
-        });
-        closeBtn === null || closeBtn === void 0 ? void 0 : closeBtn.addEventListener("pointerup", function () {
-            alert("關閉");
         });
     }
     ShakeController.prototype.addShake = function (callBack) {
@@ -88,5 +82,4 @@ var ShakeController = (function () {
     };
     return ShakeController;
 }());
-exports.default = ShakeController;
 new ShakeController();

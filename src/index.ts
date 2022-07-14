@@ -3,7 +3,7 @@
  * @export
  * @class ShakeController
  */
-export default class ShakeController {
+class ShakeController {
     // 當用戶的兩次加速度差值大於這個幅度，判定用戶進行了搖一搖功能
     maxRange = 30;
     //當用戶的兩次加速度差值小於這個幅度，判定用戶停止搖動手機
@@ -12,18 +12,13 @@ export default class ShakeController {
     constructor() {
         // 調用搖一搖
         const startBtn = document.querySelector("#startBtn");
-        const closeBtn = document.querySelector("#closeBtn");
 
-        let shakeIndex = 0;
         // 再次強調 IOS 13.3 需要用戶觸發，再能開啟搖一搖
         startBtn?.addEventListener("pointerup", () => {
             alert("開啟");
             this.addShake(() => {
                 alert("您進行了搖一搖");
             });
-        });
-        closeBtn?.addEventListener("pointerup", () => {
-            alert("關閉");
         });
     }
 
