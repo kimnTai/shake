@@ -114,3 +114,20 @@ class ShakeController {
 }
 
 new ShakeController();
+
+const winCredit = 5;
+
+let random = [0, 0, 0, 0, 0];
+let i = 0;
+do {
+    const array = random
+        .map(Math.random)
+        .map((v, _, arr) => v / arr.reduce((a, b) => a + b))
+        .map((v) => Math.floor(v * winCredit))
+        .slice(0, -1);
+    array.push(winCredit - array.reduce((a, b) => a + b));
+    random = array;
+    i++;
+} while (random.includes(0));
+
+console.log(random, i);
