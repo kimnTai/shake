@@ -1,0 +1,541 @@
+[
+    {
+        "編號": "A1",
+        "名稱": "帳號註冊",
+        "方法": "POST",
+        "路徑": "/api/user/register",
+        "頁面群組": "A. 註冊頁"
+    },
+    {
+        "編號": "A2",
+        "名稱": "驗證電子郵件",
+        "方法": "GET",
+        "路徑": "/api/user/emailVerification/{token}",
+        "頁面群組": "A. 註冊頁"
+    },
+    {
+        "編號": "A3",
+        "名稱": "重新傳送驗證電子郵件",
+        "方法": "GET",
+        "路徑": "/api/user/resendEmailVerification/{uid}",
+        "頁面群組": "A. 註冊頁"
+    },
+    {
+        "編號": "B1",
+        "名稱": "登入",
+        "方法": "POST",
+        "路徑": "/api/user/login",
+        "頁面群組": "B. 登入頁"
+    },
+    {
+        "編號": "B2",
+        "名稱": "第三方登入/註冊",
+        "方法": "GET",
+        "路徑": "/api/user/login/google",
+        "頁面群組": "B. 登入頁"
+    },
+    {
+        "編號": "C1",
+        "名稱": "忘記密碼發信",
+        "方法": "POST",
+        "路徑": "/api/reset/resetPassword",
+        "頁面群組": "C. 忘記密碼頁"
+    },
+    {
+        "編號": "D1",
+        "名稱": "取得單一組織",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D2",
+        "名稱": "新增組織",
+        "方法": "POST",
+        "路徑": "/api/user/{uid}/organizations",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D3",
+        "名稱": "修改組織",
+        "方法": "PATCH",
+        "路徑": "/api/user/{uid}/organizations/{oid}",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D4",
+        "名稱": "刪除組織",
+        "方法": "DELETE",
+        "路徑": "/api/user/{uid}/organizations/{oid}",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D5",
+        "名稱": "邀請組織成員",
+        "方法": "POST",
+        "路徑": "/api/user/{uid}/organizations/{oid}/invite",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D6",
+        "名稱": "取得所有成員",
+        "方法": "GET",
+        "路徑": "/api/user/{uid}/organizations/{oid}/members",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D7",
+        "名稱": "退出組織",
+        "方法": "POST",
+        "路徑": "/api/user/{uid}/organizations/{oid}/settings/quit",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D8",
+        "名稱": "移除成員",
+        "方法": "POST",
+        "路徑": "/api/user/{uid}/organizations/{oid}/settings/remove",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "D9",
+        "名稱": "修改成員權限",
+        "方法": "PATCH",
+        "路徑": "/api/user/{uid}/organizations/{oid}/members",
+        "頁面群組": "D. 組織群組"
+    },
+    {
+        "編號": "E1",
+        "名稱": "全部看板",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E2",
+        "名稱": "單一看板",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}/{boardid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E3",
+        "名稱": "新增看板",
+        "方法": "POST",
+        "路徑": "/api/organizations/{oid}/{boardid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E4",
+        "名稱": "修改看板",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E5",
+        "名稱": "刪除看板",
+        "方法": "DELETE",
+        "路徑": "/api/organizations/{oid}/{boardid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E6",
+        "名稱": "複製看板",
+        "方法": "POST",
+        "路徑": "/api/organizations/{oid}/{boardid}/duplicate",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E7",
+        "名稱": "取得標籤",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}/{boardid}/tags",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E8",
+        "名稱": "新增標籤",
+        "方法": "POST",
+        "路徑": "/api/organizations/{oid}/{boardid}/tags",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E9",
+        "名稱": "修改標籤",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}/tags/{tid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E10",
+        "名稱": "刪除標籤",
+        "方法": "DELETE",
+        "路徑": "/api/organizations/{oid}/{boardid}/tags/{tid}",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E11",
+        "名稱": "邀請看板成員",
+        "方法": "POST",
+        "路徑": "/api/organizations/{oid}/{boardid}/invite",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E12",
+        "名稱": "退出看板",
+        "方法": "POST",
+        "路徑": "/api/organizations/{oid}/{boardid}/quit",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E13",
+        "名稱": "修改看板名稱",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}/updateTitle",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E14",
+        "名稱": "修改看板所屬工作區",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}/updateWorkspace",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E15",
+        "名稱": "修改看板權限",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}/updatePermissions",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E16",
+        "名稱": "篩選列表/卡片",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}/{boardid}/search",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E17",
+        "名稱": "已封存列表/卡片",
+        "方法": "GET",
+        "路徑": "/api/organizations/{oid}/{boardid}/archive",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "E18",
+        "名稱": "復原封存列表/卡片",
+        "方法": "PATCH",
+        "路徑": "/api/organizations/{oid}/{boardid}/return",
+        "頁面群組": "E. 看板群組"
+    },
+    {
+        "編號": "F1",
+        "名稱": "全部列表",
+        "方法": "GET",
+        "路徑": "/api/board",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F2",
+        "名稱": "新增列表",
+        "方法": "POST",
+        "路徑": "/api/lists",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F3",
+        "名稱": "修改列表",
+        "方法": "PATCH",
+        "路徑": "/api/lists/{listId}",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F4",
+        "名稱": "刪除列表",
+        "方法": "DELETE",
+        "路徑": "/api/organizations/{oid}/{boardid}/list/{lid}",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F5",
+        "名稱": "封存列表",
+        "方法": "PATCH",
+        "路徑": "/api/lists/{listId}",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F6",
+        "名稱": "封存所有卡片",
+        "方法": "PATCH",
+        "路徑": "/api/lists/{listId}/archiveAllCards",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "F7",
+        "名稱": "封存單一卡片",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cardId}",
+        "頁面群組": "F. 列表群組"
+    },
+    {
+        "編號": "G1",
+        "名稱": "單張/列表/看板的 卡片",
+        "方法": "GET",
+        "路徑": "",
+        "頁面群組": "G. 卡片群組"
+    },
+    {
+        "編號": "G2-1",
+        "名稱": "取得單一卡片內容",
+        "方法": "GET",
+        "路徑": "/api/cards/{cid}",
+        "頁面群組": "G. 卡片群組"
+    },
+    {
+        "編號": "G2-2",
+        "名稱": "新增卡片",
+        "方法": "POST",
+        "路徑": "/api/cards",
+        "頁面群組": "G. 卡片群組"
+    },
+    {
+        "編號": "G2-3",
+        "名稱": "修改卡片",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cid}",
+        "頁面群組": "G. 卡片群組"
+    },
+    {
+        "編號": "G2-4",
+        "名稱": "刪除卡片",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}",
+        "頁面群組": "G. 卡片群組"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "",
+        "路徑": "/api/cards/{cid}/follow",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "",
+        "路徑": "/api/cards/{cid}/unfollow",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "取得看板內所有成員",
+        "方法": "GET",
+        "路徑": "/api/boards/{boardid}/members",
+        "頁面群組": "E. 看板群組, G. 卡片群組"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "GET",
+        "路徑": "/api/cards/{cid}/members",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/members/{memberid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/members/{memberid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "GET",
+        "路徑": "/api/cards/{cid}/attachments",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/attachments",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cid}/attachments/{attachid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/attachments/{attachid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/cover",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/cover",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "GET",
+        "路徑": "/api/cards/{cid}/checklist",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/checklist",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cid}/checklist/{checklistid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/checklist/{checklistid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "GET",
+        "路徑": "/api/cards/{cid}/comments",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/comments",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cid}/comments/{commentid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/comments/{commentid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/labels/{labelid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/labels/{labelid}",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "",
+        "路徑": "？",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "POST",
+        "路徑": "/api/cards/{cid}/date",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "PATCH",
+        "路徑": "/api/cards/{cid}/date",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "GX",
+        "名稱": "",
+        "方法": "DELETE",
+        "路徑": "/api/cards/{cid}/date",
+        "頁面群組": "GC. 卡片群組元件"
+    },
+    {
+        "編號": "H1",
+        "名稱": "重設密碼",
+        "方法": "POST",
+        "路徑": "/api/user/{uid}/resetPassword",
+        "頁面群組": "H. 個人檔案"
+    },
+    {
+        "編號": "H2",
+        "名稱": "個人檔案",
+        "方法": "GET",
+        "路徑": "/api/user/{uid}",
+        "頁面群組": "H. 個人檔案"
+    },
+    {
+        "編號": "H3",
+        "名稱": "登出",
+        "方法": "POST",
+        "路徑": "/api/logout",
+        "頁面群組": "H. 個人檔案"
+    },
+    {
+        "編號": "I1",
+        "名稱": "搜尋卡片/列表",
+        "方法": "GET",
+        "路徑": "/api/user/{uid}?q={query}",
+        "頁面群組": "I. 導覽列搜尋"
+    },
+    {
+        "編號": "Z1",
+        "名稱": "錯誤管理",
+        "方法": "",
+        "路徑": "",
+        "頁面群組": "Z. 錯誤頁"
+    },
+    {
+        "編號": "",
+        "名稱": "首頁",
+        "方法": "",
+        "路徑": "",
+        "頁面群組": "X. 首頁"
+    }
+]
