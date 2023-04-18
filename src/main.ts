@@ -128,6 +128,10 @@ const b = [
     "https://trello.com/1/Organizations/643e58717ad28c3aa5363107",
     "https://trello.com/1/lists",
     [
+        // 封存列表
+        "https://trello.com/1/Boards/640307027081f023cc8ac467",
+    ],
+    [
         // 看板、建立看板
         "https://trello.com/1/boards",
         "https://trello.com/1/boards/643e762642f24582ab4a4ee7",
@@ -143,6 +147,10 @@ const b = [
         "https://trello.com/1/cards",
         // 取得該卡片
         "https://trello.com/1/card/643e5ad68f6ad470b32bb728",
+        [
+            // 封存
+            "https://trello.com/1/boards/640307027081f023cc8ac467/cards/closed",
+        ],
         [
             // 建立新標籤
             "https://trello.com/1/card/643e6384fe252aa38a8a80df/labels",
