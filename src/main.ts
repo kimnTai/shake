@@ -1,4 +1,3 @@
-import "./style.css";
 import api from "../public/api.json";
 import lodash from "lodash";
 
@@ -120,13 +119,18 @@ function arrayToObject(arr: any[]) {
 const b = [
     "https://trello.com/1/member",
     "https://trello.com/1/member/me",
+    // 標記星號的看板
+    "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars",
+    // 移除星號
+    "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars/643e75c227b5d72041ffac9c",
     "https://trello.com/1/organization/userworkspace86655444",
     // 工作區成員
     "https://trello.com/1/Organizations/643e58717ad28c3aa5363107",
     "https://trello.com/1/lists",
     [
-        // 看板
+        // 看板、建立看板
         "https://trello.com/1/boards",
+        "https://trello.com/1/boards/643e762642f24582ab4a4ee7",
         // 從看板建立標籤
         "https://trello.com/1/board/643e58af00c7f5fe837edd59/labels",
     ],
