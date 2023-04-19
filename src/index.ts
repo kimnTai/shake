@@ -78,7 +78,6 @@ class ShakeController {
         return (...arg: any) => {
             if (timer) return;
             fn.apply(this, arg);
-            //@ts-ignore
             timer = setTimeout(() => (timer = 0), interval);
         };
     }
@@ -107,7 +106,7 @@ class ShakeController {
         } else {
             // 其他支持加速度檢測的系統
             const timer = setTimeout(() => errCb("用戶未開啟權限"), 1000);
-            window.addEventListener("devicemotion", (e) => clearTimeout(timer), { once: true });
+            window.addEventListener("devicemotion", (_e) => clearTimeout(timer), { once: true });
             window.addEventListener("devicemotion", cb);
         }
     }

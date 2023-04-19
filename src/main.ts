@@ -1,105 +1,75 @@
-import api from "../public/api.json";
 import lodash from "lodash";
-
+console.log;
 const obj = {
     api: {
+        email: {
+            resetPassword: {},
+        },
         user: {
             register: {},
             emailVerification: {
                 "{token}": {},
             },
             resendEmailVerification: {
-                "{uid}": {},
+                "{userID}": {},
             },
             login: {
                 google: {},
             },
-            "{uid}": {
-                organizations: {
-                    "{oid}": {
-                        invite: {},
-                        members: {},
-                        settings: {
-                            quit: {},
-                            remove: {},
-                        },
-                    },
-                },
+            "{userID}": {
                 resetPassword: {},
             },
-            "{uid}?q={query}": {},
-        },
-        reset: {
-            resetPassword: {},
+            "{userID}?q={query}": {},
         },
         organizations: {
-            "{oid}": {
-                "{boardid}": {
-                    duplicate: {},
-                    tags: {
-                        "{tid}": {},
-                    },
-                    invite: {},
+            "{orgID}": {
+                invitationSecret: {},
+                members: {},
+                settings: {
                     quit: {},
-                    updateTitle: {},
-                    updateWorkspace: {},
-                    updatePermissions: {},
-                    search: {},
-                    archive: {},
-                    return: {},
-                    list: {
-                        "{lid}": {},
-                    },
                 },
             },
         },
-        board: {},
+        boards: {
+            "{boardID}": {
+                updateWorkspace: {},
+                updatePermissions: {},
+                labels: {
+                    "{labelID}": {},
+                },
+                invitationSecret: {},
+                quit: {},
+                search: {},
+                archive: {},
+                members: {},
+            },
+        },
         lists: {
-            "{listid}": {},
-            "{listId}": {
+            "{listID}": {
                 archiveAllCards: {},
             },
         },
         cards: {
-            "{cardId}": {},
-            "{cid}": {
+            "{cardID}": {
                 members: {
-                    "{memberid}": {},
+                    "{memberID}": {},
                 },
                 attachments: {
-                    "{attachid}": {},
+                    "{attID}": {},
                 },
-                cover: {},
                 checklist: {
-                    "{checklistid}": {},
+                    "{checklistID}": {},
                 },
                 comments: {
-                    "{commentid}": {},
+                    "{commentID}": {},
                 },
                 labels: {
-                    "{labelid}": {},
+                    "{labelID}": {},
                 },
-                date: {},
             },
         },
-        boards: {
-            "{boardid}": {
-                members: {},
-            },
-        },
-        logout: {},
     },
 };
-
-const c = api
-    .map((v) => {
-        const path = v.路徑.split("/").filter(Boolean);
-        const obj = arrayToObject(path);
-        return obj;
-    })
-    .reduce((pre, value) => {
-        return lodash.merge(pre, value);
-    }, {} as any);
 
 function arrayToObject(arr: any[]) {
     if (!arr.length) {
@@ -116,20 +86,35 @@ function arrayToObject(arr: any[]) {
     return obj;
 }
 
-const b = [
-    "https://trello.com/1/member",
-    "https://trello.com/1/member/me",
-    // 標記星號的看板
-    "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars",
-    // 移除星號
-    "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars/643e75c227b5d72041ffac9c",
-    "https://trello.com/1/organization/userworkspace86655444",
-    // 工作區成員
-    "https://trello.com/1/Organizations/643e58717ad28c3aa5363107",
-    "https://trello.com/1/lists",
+const trelloAPI = [
+    // 高級搜尋
+    "https://trello.com/1/search",
     [
+        // 成員
+        "https://trello.com/1/member",
+        "https://trello.com/1/member/me",
+        // 標記星號的看板
+        "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars",
+        // 移除星號
+        "https://trello.com/1/member/643e586a41751a29d5a5ee56/boardStars/643e75c227b5d72041ffac9c",
+    ],
+    [
+        // 組織/工作區
+        "https://trello.com/1/organization/userworkspace86655444",
+        // 工作區成員
+        "https://trello.com/1/Organizations/643e58717ad28c3aa5363107",
+        // 工作區設定
+        "https://trello.com/1/Organizations/usera504f686b662cd1509f2284e24f03e8a",
+        // 邀請連結
+        "https://trello.com/1/organizations/643f5f3f0204a97cd3fc8922/invitationSecret",
+    ],
+    [
+        // 列表
+        "https://trello.com/1/lists",
         // 封存列表
         "https://trello.com/1/Boards/640307027081f023cc8ac467",
+        // 移動列表
+        "https://trello.com/1/lists/643e58af00c7f5fe837edd60",
     ],
     [
         // 看板、建立看板
@@ -137,12 +122,15 @@ const b = [
         "https://trello.com/1/boards/643e762642f24582ab4a4ee7",
         // 從看板建立標籤
         "https://trello.com/1/board/643e58af00c7f5fe837edd59/labels",
+        // 看板邀請連結
+        "https://trello.com/1/boards/643e58af00c7f5fe837edd59/invitationSecret",
     ],
     [
         // 編輯標籤
         "https://trello.com/1/labels/643e58afd5e368f25051af96",
     ],
     [
+        // 追蹤or不追蹤卡片 -> PUT 卡片狀態
         // 卡片
         "https://trello.com/1/cards",
         // 取得該卡片
@@ -178,5 +166,3 @@ const b = [
         ],
     ],
 ];
-
-// 追蹤or不追蹤卡片 -> PUT 卡片狀態
