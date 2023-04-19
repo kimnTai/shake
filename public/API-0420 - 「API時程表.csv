@@ -1,0 +1,69 @@
+編號,名稱,check,方法,路徑,備註,功能說明
+C1,忘記密碼發信,TRUE,POST,/api/email/resetPassword,,
+A1,帳號註冊,TRUE,POST,/api/user/register,,
+A2,驗證電子郵件,TRUE,GET,/api/user/emailVerification/{token},,
+A3,重新傳送驗證電子郵件,TRUE,GET,/api/user/resendEmailVerification/{userID},,
+B1,登入,TRUE,POST,/api/user/login,,
+B2,第三方登入/註冊,TRUE,GET,/api/user/login/google,,
+H2,個人檔案,TRUE,GET,/api/user/{userID},,！尚無此功能
+I1,搜尋卡片/列表,FALSE,GET,/api/user/{userID}?q={query},/api/search,
+H1,重設密碼,TRUE,POST,/api/user/{userID}/resetPassword,,！尚無此功能 在個人profile裡面做重設密碼的動作
+D2,新增組織,TRUE,POST,/api/organizations,,
+D1,取得單一組織,TRUE,GET,/api/organizations/{orgID},,
+D3,修改組織,TRUE,PUT,/api/organizations/{orgID},,
+D4,刪除組織,TRUE,DELETE,/api/organizations/{orgID},,
+D5,"邀請組織成員
+/產生邀請連結",TRUE,POST,/api/organizations/{orgID}/invitationSecret,"缺取得邀請連結？啟動停用連結？
+輸入 Email 會出現此帳號是 Trello 會員之類的資訊嗎？",
+D6,取得所有成員,TRUE,GET,/api/organizations/{orgID}/members,,
+D9,修改成員權限,TRUE,PUT,/api/organizations/{orgID}/members/{memberID},,
+D8,移除成員,TRUE,POST,/api/organizations/{orgID}/members/{memberID},"自己退出組織和移除成員有可能是同一支API？
+⇒ 先保留",
+D7,退出組織,TRUE,POST,/api/organizations/{orgID}/members/{memberID},誰要退出組織,
+F1,"全部列表
+/建立看板",TRUE,GET,/api/boards,,
+E4,修改看板,TRUE,PUT,/api/boards/{boardID},,
+E5,刪除看板,TRUE,DELETE,/api/boards/{boardID},,
+E14,修改看板所屬工作區,TRUE,PUT,/api/boards/{boardID},,
+E15,修改看板權限,TRUE,PUT,/api/boards/{boardID},,
+E16,篩選列表/卡片,FALSE,GET,/api/boards/{boardID}/search,/api/search,
+E11,邀請看板成員,TRUE,POST,/api/boards/{boardID}/invitationSecret,,
+E7,取得標籤,TRUE,GET,/api/boards/{boardID}/labels,列表、卡片都會用到,
+E8,新增標籤,TRUE,POST,/api/boards/{boardID}/labels,列表、卡片都會用到,
+E9,修改標籤,TRUE,PUT,/api/boards/{boardID}/labels/{labelID},列表、卡片都會用到,
+E10,刪除標籤,TRUE,DELETE,/api/boards/{boardID}/labels/{labelID},列表、卡片都會用到,
+E17,已封存列表/卡片,TRUE,GET,/api/boards/{boardID}/cards/closed,列表、卡片都會用到,
+GX,取得看板內所有成員,TRUE,GET,/api/boards/{boardID}/members,"多個地方會用到
+看板那邊應該會有這支？",
+E12,退出看板,TRUE,POST,/api/boards/{boardID}/members/{memberID},,
+F2,新增列表,TRUE,POST,/api/lists,,
+F3,修改列表,TRUE,PUT,/api/lists/{listID},,
+F5,封存列表,TRUE,PUT,/api/lists/{listID},,
+F4,刪除列表,TRUE,DELETE,/api/lists/{listID},目前沒看到這個功能,
+E18,復原封存列表/卡片,TRUE,PUT,/api/lists/{listID},列表、卡片都會用到,
+F6,封存所有卡片,TRUE,PUT,/api/lists/{listID}/archiveAllCards,,
+G2-2,新增卡片,TRUE,POST,/api/cards,,
+F7,封存單一卡片,FALSE,PUT,/api/cards/{cardID}/closed,,
+G2-1,取得單一卡片內容,TRUE,GET,/api/cards/{cardID},,
+G2-3,修改卡片,TRUE,PUT,/api/cards/{cardID},,"- Title
+- Description"
+G2-4,刪除卡片,TRUE,DELETE,/api/cards/{cardID},,
+GX,成員,TRUE,GET,/api/cards/{cardID}/members,"可以整合到卡片修改
+需要嗎？取得單一卡片內容應該會拿到卡片所有成員",應該不需要
+GX,,TRUE,POST,/api/cards/{cardID}/members/{memberID},可以整合到卡片修改,
+GX,,TRUE,DELETE,/api/cards/{cardID}/members/{memberID},可以整合到卡片修改,
+GX,附件,TRUE,GET,/api/cards/{cardID}/attachments,可以整合到取得卡片,
+GX,,TRUE,POST,/api/cards/{cardID}/attachments,可以整合到卡片修改,
+GX,,TRUE,PUT,/api/cards/{cardID}/attachments/{attID},可以整合到卡片修改,
+GX,,TRUE,DELETE,/api/cards/{cardID}/attachments/{attID},可以整合到卡片修改,
+GX,代辦清單,TRUE,GET,/api/cards/{cardID}/checklist,可以整合到 取得卡片,
+GX,,TRUE,POST,/api/cards/{cardID}/checklist,可以整合到卡片修改,
+GX,,TRUE,PUT,/api/cards/{cardID}/checklist/{checklistID},可以整合到卡片修改,
+GX,,TRUE,DELETE,/api/cards/{cardID}/checklist/{checklistID},可以整合到卡片修改,
+GX,留言,TRUE,GET,/api/cards/{cardID}/comments,可以整合到 取得卡片,
+GX,,TRUE,POST,/api/cards/{cardID}/comments,可以整合到卡片修改,
+GX,,TRUE,PUT,/api/cards/{cardID}/comments/{commentID},可以整合到卡片修改,
+GX,,TRUE,DELETE,/api/cards/{cardID}/comments/{commentID},可以整合到卡片修改,
+GX,標籤,TRUE,POST,/api/cards/{cardID}/labels/{labelID},"可以整合到卡片修改
+- 卡片一開始的標籤，應該會在取得卡片內容時拿到？",
+GX,,TRUE,DELETE,/api/cards/{cardID}/labels/{labelID},可以整合到卡片修改,

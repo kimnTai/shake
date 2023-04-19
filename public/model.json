@@ -1,0 +1,106 @@
+[
+    {
+        "Collections": "User",
+        "名稱": "會員資料",
+        "欄位": "• id: 字串。\n• name: 字串，使用者的名稱。\n• email: 字串，使用者的電子郵件地址。\n• password: 字串，使用者的密碼。\n• avatar: 字串，使用者的頭像圖片 URL。\n• googleId: 字串，google 註冊 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Organization",
+        "名稱": "組織",
+        "欄位": "• id: 字串。\n• name: 字串，組織名稱。\n• permission: private | public，組織觀看權限。\n\n• member: json 陣列，組織成員物件。\n• board: BoardID 陣列，組織看板。",
+        "負責人": "",
+        "備註": "type member {\nuserId: Types.ObjectId;\nrole: editor | viewer | manager;\n}",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Board",
+        "名稱": "看板",
+        "欄位": "• id: 字串。\n• name: 字串，看板名稱。\n• closed: 布林值，表示看板是否已封存。\n• permission: private | public，看板觀看權限。\n\n• list: ListId 陣列，看板列表。\n• label: labelID 陣列，看板標籤。\n• member: json 陣列，看板成員物件。",
+        "負責人": "",
+        "備註": "type member {\nuserId: Types.ObjectId;\nrole: editor | viewer | manager;\n}",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "List",
+        "名稱": "卡片列表",
+        "欄位": "• id: 字串。\n• name: 字串，列表名稱。\n• closed: 布林值，列表是否已封存。\n• position: 浮點數，列表在看板中的位置。\n\n• boardId: BoardID，列表所屬看板 ID。\n• card: CardID 陣列，列表所屬看板 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Label",
+        "名稱": "卡片標籤",
+        "欄位": "• id: 字串。\n• name: 字串，標籤的名稱。\n• color: 字串，標籤的顏色。\n\n• boardId: 字串，標籤所屬的看板 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Card",
+        "名稱": "卡片",
+        "欄位": "• id: 字串。\n• name: 字串，卡片的名稱。\n• description: 字串，任務卡片的描述。\n• closed: 布林值，卡片是否已封存。\n• position: 浮點數，任務卡片在清單中的位置。\n• color: 字串，卡片的顏色。\n• dueDate: 字串，任務卡片的截止日期。\n• startDate: 字串，任務卡片的開始日期。\n• dueRemider: 整數，任務卡片的提醒設定。\n\n• listId: 字串，卡片所屬的列表 ID。\n• label: labelID 陣列，卡片標籤。\n• member: UserID 陣列，卡片的成員 ID。\n• checklist: ChecklistID 陣列，卡片的待辦清單 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Checklist",
+        "名稱": "卡片待辦清單",
+        "欄位": "• id: 字串。\n• name: 字串，待辦清單的標題。\n• position: 整數，檢查清單在任務卡片中的位置。\n\n• cardId: CardID，檢查清單所屬的任務卡片 ID。\n• checkItem: CheckItem 陣列，卡片的待辦事項 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "CheckItem",
+        "名稱": "待辦清單事項",
+        "欄位": "• id: 字串。\n• name: 字串，檢查清單的標題。\n• completed: 布林值，表示檢查清單是否已完成。\n• position: 整數，檢查清單在任務卡片中的位置。\n\n• checklistId: ChecklistID ，事項所屬的清單 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Comment",
+        "名稱": "卡片評論",
+        "欄位": "• id: 字串。\n• comment: 字串，評論的內容。\n\n• cardId: CardID，評論所屬的任務卡片 ID。\n• userId: UserID，發表評論的使用者 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Attachment",
+        "名稱": "卡片附件",
+        "欄位": "• id: 字串。\n• dirname: 字串，附件儲存位置。\n• filename: 字串，附件檔案名稱。\n\n• cardId: CardID，附件所屬的任務卡片 ID。\n• userId: UserID，附件所上傳使用者 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Action",
+        "名稱": "動作",
+        "欄位": "• id: 字串。\n• event: createCard | moveCard | commentCard，動作事件。\n• data: 字串，動作資料。\n\n• userId: UserID，觸發的使用者 ID。\n• cardId: CardID，觸發的卡片 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Notification",
+        "名稱": "通知",
+        "欄位": "• id: 字串。\n• text: 字串，通知的內容。\n• isRead: 布林值，已讀(true)、未讀(false)。\n\n• userId: UserID，接收通知的使用者 ID。\n• actionId: ActionID，動作 ID。",
+        "負責人": "",
+        "備註": "",
+        "Status": "尚未開始"
+    },
+    {
+        "Collections": "Archive",
+        "名稱": "封存",
+        "欄位": "• id: 字串。\n• fromModel: 字串，來自 model 名稱。\n• originalRecordId: 字串，資料 id。\n• originalRecord: json，封存資料。",
+        "負責人": "",
+        "備註": "還在思考怎麼用",
+        "Status": "尚未開始"
+    }
+]

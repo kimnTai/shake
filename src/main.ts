@@ -1,5 +1,5 @@
 import lodash from "lodash";
-console.log;
+
 const obj = {
     api: {
         email: {
@@ -107,6 +107,8 @@ const trelloAPI = [
         "https://trello.com/1/Organizations/usera504f686b662cd1509f2284e24f03e8a",
         // 邀請連結
         "https://trello.com/1/organizations/643f5f3f0204a97cd3fc8922/invitationSecret",
+        // 退出
+        "https://trello.com/1/Organization/640301905650ad3670af3334/members/6416e67476db1ae1ddee5397",
     ],
     [
         // 列表
@@ -119,11 +121,16 @@ const trelloAPI = [
     [
         // 看板、建立看板
         "https://trello.com/1/boards",
+        // 修改看板工作區
         "https://trello.com/1/boards/643e762642f24582ab4a4ee7",
         // 從看板建立標籤
         "https://trello.com/1/board/643e58af00c7f5fe837edd59/labels",
         // 看板邀請連結
         "https://trello.com/1/boards/643e58af00c7f5fe837edd59/invitationSecret",
+        // [DELETE] 退出看板
+        "https://trello.com/1/Board/640307027081f023cc8ac467/members/63fc76b47d772a0c9c8bfba3",
+        // [PUT] 加入看板
+        "https://trello.com/1/boards/640307027081f023cc8ac467/members/",
     ],
     [
         // 編輯標籤
