@@ -19,7 +19,7 @@
         "編號": "A3",
         "名稱": "重新傳送驗證電子郵件",
         "方法": "GET",
-        "路徑": "/api/user/resendEmailVerification/{uid}",
+        "路徑": "/api/user/resendEmailVerification/{userID}",
         "備註": "",
         "功能說明": ""
     },
@@ -35,15 +35,7 @@
         "編號": "B2",
         "名稱": "第三方登入/註冊",
         "方法": "GET",
-        "路徑": "/api/user/login/goolge",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "C1",
-        "名稱": "忘記密碼發信",
-        "方法": "POST",
-        "路徑": "/api/reset/resetPassword",
+        "路徑": "/api/user/login/google",
         "備註": "",
         "功能說明": ""
     },
@@ -51,7 +43,7 @@
         "編號": "D1",
         "名稱": "取得單一組織",
         "方法": "GET",
-        "路徑": "/api/organizations/{oid}",
+        "路徑": "/api/organizations/{orgID}",
         "備註": "",
         "功能說明": ""
     },
@@ -59,7 +51,7 @@
         "編號": "D2",
         "名稱": "新增組織",
         "方法": "POST",
-        "路徑": "/api/user/{uid}/organizations",
+        "路徑": "/api/organizations",
         "備註": "",
         "功能說明": ""
     },
@@ -67,7 +59,7 @@
         "編號": "D3",
         "名稱": "修改組織",
         "方法": "PUT",
-        "路徑": "/api/user/{uid}/organizations/{oid}",
+        "路徑": "/api/organizations/{orgID}",
         "備註": "",
         "功能說明": ""
     },
@@ -75,23 +67,23 @@
         "編號": "D4",
         "名稱": "刪除組織",
         "方法": "DELETE",
-        "路徑": "/api/user/{uid}/organizations/{oid}",
+        "路徑": "/api/organizations/{orgID}",
         "備註": "",
         "功能說明": ""
     },
     {
         "編號": "D5",
-        "名稱": "邀請組織成員",
+        "名稱": "邀請組織成員\n/產生邀請連結",
         "方法": "POST",
-        "路徑": "/api/user/{uid}/organizations/{oid}/invite",
-        "備註": "缺取得邀請連結？啟動停用連結？輸入 Email 會出現此帳號是 Trello 會員之類的資訊嗎？",
+        "路徑": "/api/organizations/{orgID}/invitationSecret",
+        "備註": "缺取得邀請連結？啟動停用連結？\n輸入 Email 會出現此帳號是 Trello 會員之類的資訊嗎？",
         "功能說明": ""
     },
     {
         "編號": "D6",
         "名稱": "取得所有成員",
         "方法": "GET",
-        "路徑": "/api/user/{uid}/organizations/{oid}/members",
+        "路徑": "/api/organizations/{orgID}/members",
         "備註": "",
         "功能說明": ""
     },
@@ -99,15 +91,15 @@
         "編號": "D7",
         "名稱": "退出組織",
         "方法": "POST",
-        "路徑": "/api/user/{uid}/organizations/{oid}/settings/quit",
-        "備註": "",
+        "路徑": "/api/organizations/{orgID}/members/{memberID}",
+        "備註": "誰要退出組織",
         "功能說明": ""
     },
     {
         "編號": "D8",
         "名稱": "移除成員",
         "方法": "POST",
-        "路徑": "/api/user/{uid}/organizations/{oid}/settings/remove",
+        "路徑": "/api/organizations/{orgID}/members/{memberID}",
         "備註": "自己退出組織和移除成員有可能是同一支API？\n⇒ 先保留",
         "功能說明": ""
     },
@@ -115,39 +107,15 @@
         "編號": "D9",
         "名稱": "修改成員權限",
         "方法": "PUT",
-        "路徑": "/api/user/{uid}/organizations/{oid}/members",
+        "路徑": "/api/organizations/{orgID}/members/{memberID}",
         "備註": "",
         "功能說明": ""
-    },
-    {
-        "編號": "E1",
-        "名稱": "全部看板",
-        "方法": "GET",
-        "路徑": "/api/organizations/{oid}",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "E2",
-        "名稱": "單一看板",
-        "方法": "GET",
-        "路徑": "/api/organizations/{oid}/{boardid}",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "E3",
-        "名稱": "新增看板",
-        "方法": "POST",
-        "路徑": "/api/organizations/{oid}/{boardid}",
-        "備註": "",
-        "功能說明": "新增看板時會設定\n1. 看板名稱\n2. 看板所屬工作區\n3. 看板觀看權限"
     },
     {
         "編號": "E4",
         "名稱": "修改看板",
         "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}",
+        "路徑": "/api/boards/{boardID}",
         "備註": "",
         "功能說明": ""
     },
@@ -155,23 +123,15 @@
         "編號": "E5",
         "名稱": "刪除看板",
         "方法": "DELETE",
-        "路徑": "/api/organizations/{oid}/{boardid}",
+        "路徑": "/api/boards/{boardID}",
         "備註": "",
         "功能說明": ""
-    },
-    {
-        "編號": "E6",
-        "名稱": "複製看板",
-        "方法": "POST",
-        "路徑": "/api/organizations/{oid}/{boardid}/duplicate",
-        "備註": "",
-        "功能說明": "複製看板時會設定\n1. 看板名稱\n2. 看板所屬工作區\n3. 看板觀看權限"
     },
     {
         "編號": "E7",
         "名稱": "取得標籤",
         "方法": "GET",
-        "路徑": "/api/organizations/{oid}/{boardid}/tags",
+        "路徑": "/api/boards/{boardID}/labels",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
@@ -179,7 +139,7 @@
         "編號": "E8",
         "名稱": "新增標籤",
         "方法": "POST",
-        "路徑": "/api/organizations/{oid}/{boardid}/tags",
+        "路徑": "/api/boards/{boardID}/labels",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
@@ -187,7 +147,7 @@
         "編號": "E9",
         "名稱": "修改標籤",
         "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}/tags/{tid}",
+        "路徑": "/api/boards/{boardID}/labels/{labelID}",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
@@ -195,7 +155,7 @@
         "編號": "E10",
         "名稱": "刪除標籤",
         "方法": "DELETE",
-        "路徑": "/api/organizations/{oid}/{boardid}/tags/{tid}",
+        "路徑": "/api/boards/{boardID}/labels/{labelID}",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
@@ -203,7 +163,7 @@
         "編號": "E11",
         "名稱": "邀請看板成員",
         "方法": "POST",
-        "路徑": "/api/organizations/{oid}/{boardid}/invite",
+        "路徑": "/api/boards/{boardID}/invitationSecret",
         "備註": "",
         "功能說明": ""
     },
@@ -211,15 +171,7 @@
         "編號": "E12",
         "名稱": "退出看板",
         "方法": "POST",
-        "路徑": "/api/organizations/{oid}/{boardid}/quit",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "E13",
-        "名稱": "修改看板名稱",
-        "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}/updateTitle",
+        "路徑": "/api/boards/{boardID}/members/{memberID}",
         "備註": "",
         "功能說明": ""
     },
@@ -227,7 +179,7 @@
         "編號": "E14",
         "名稱": "修改看板所屬工作區",
         "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}/updateWorkspace",
+        "路徑": "/api/boards/{boardID}",
         "備註": "",
         "功能說明": ""
     },
@@ -235,7 +187,7 @@
         "編號": "E15",
         "名稱": "修改看板權限",
         "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}/updatePermissions",
+        "路徑": "/api/boards/{boardID}",
         "備註": "",
         "功能說明": ""
     },
@@ -243,15 +195,15 @@
         "編號": "E16",
         "名稱": "篩選列表/卡片",
         "方法": "GET",
-        "路徑": "/api/organizations/{oid}/{boardid}/search",
-        "備註": "",
+        "路徑": "/api/boards/{boardID}/search",
+        "備註": "/api/search",
         "功能說明": ""
     },
     {
         "編號": "E17",
         "名稱": "已封存列表/卡片",
         "方法": "GET",
-        "路徑": "/api/organizations/{oid}/{boardid}/archive",
+        "路徑": "/api/boards/{boardID}/cards/closed",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
@@ -259,15 +211,15 @@
         "編號": "E18",
         "名稱": "復原封存列表/卡片",
         "方法": "PUT",
-        "路徑": "/api/organizations/{oid}/{boardid}/return",
+        "路徑": "/api/lists/{listID}",
         "備註": "列表、卡片都會用到",
         "功能說明": ""
     },
     {
         "編號": "F1",
-        "名稱": "全部列表",
+        "名稱": "全部列表\n/建立看板",
         "方法": "GET",
-        "路徑": "/api/board",
+        "路徑": "/api/boards",
         "備註": "",
         "功能說明": ""
     },
@@ -283,7 +235,7 @@
         "編號": "F3",
         "名稱": "修改列表",
         "方法": "PUT",
-        "路徑": "/api/lists/{listid}",
+        "路徑": "/api/lists/{listID}",
         "備註": "",
         "功能說明": ""
     },
@@ -291,7 +243,7 @@
         "編號": "F4",
         "名稱": "刪除列表",
         "方法": "DELETE",
-        "路徑": "/api/organizations/{oid}/{boardid}/list/{lid}",
+        "路徑": "/api/lists/{listID}",
         "備註": "目前沒看到這個功能",
         "功能說明": ""
     },
@@ -299,7 +251,7 @@
         "編號": "F5",
         "名稱": "封存列表",
         "方法": "PUT",
-        "路徑": "/api/lists/{listId}",
+        "路徑": "/api/lists/{listID}",
         "備註": "",
         "功能說明": ""
     },
@@ -307,7 +259,7 @@
         "編號": "F6",
         "名稱": "封存所有卡片",
         "方法": "PUT",
-        "路徑": "/api/lists/{listId}/archiveAllCards",
+        "路徑": "/api/lists/{listID}/archiveAllCards",
         "備註": "",
         "功能說明": ""
     },
@@ -315,23 +267,15 @@
         "編號": "F7",
         "名稱": "封存單一卡片",
         "方法": "PUT",
-        "路徑": "/api/cards/{cardId}",
+        "路徑": "/api/cards/{cardID}/closed",
         "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "G1",
-        "名稱": "單張/列表/看板的 卡片",
-        "方法": "GET",
-        "路徑": "",
-        "備註": "不確定哪裡會需要呼叫這支API？⇒ 先保留",
         "功能說明": ""
     },
     {
         "編號": "G2-1",
         "名稱": "取得單一卡片內容",
         "方法": "GET",
-        "路徑": "/api/cards/{cid}",
+        "路徑": "/api/cards/{cardID}",
         "備註": "",
         "功能說明": ""
     },
@@ -347,7 +291,7 @@
         "編號": "G2-3",
         "名稱": "修改卡片",
         "方法": "PUT",
-        "路徑": "/api/cards/{cid}",
+        "路徑": "/api/cards/{cardID}",
         "備註": "",
         "功能說明": "- Title\n- Description"
     },
@@ -355,7 +299,7 @@
         "編號": "G2-4",
         "名稱": "刪除卡片",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}",
+        "路徑": "/api/cards/{cardID}",
         "備註": "",
         "功能說明": ""
     },
@@ -379,64 +323,64 @@
         "編號": "GX",
         "名稱": "取得看板內所有成員",
         "方法": "GET",
-        "路徑": "/api/boards/{boardid}/members",
+        "路徑": "/api/boards/{boardID}/members",
         "備註": "多個地方會用到\n看板那邊應該會有這支？",
         "功能說明": ""
     },
     {
         "編號": "GX",
-        "名稱": "",
+        "名稱": "成員",
         "方法": "GET",
-        "路徑": "/api/cards/{cid}/members",
-        "備註": "需要嗎？取得單一卡片內容應該會拿到卡片所有成員",
+        "路徑": "/api/cards/{cardID}/members",
+        "備註": "可以整合到卡片修改\n需要嗎？取得單一卡片內容應該會拿到卡片所有成員",
         "功能說明": "應該不需要"
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "POST",
-        "路徑": "/api/cards/{cid}/members/{memberid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/members/{memberID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/members/{memberid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/members/{memberID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
-        "名稱": "",
+        "名稱": "附件",
         "方法": "GET",
-        "路徑": "/api/cards/{cid}/attachments",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/attachments",
+        "備註": "可以整合到取得卡片",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "POST",
-        "路徑": "/api/cards/{cid}/attachments",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/attachments",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "PUT",
-        "路徑": "/api/cards/{cid}/attachments/{attachid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/attachments/{attID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/attachments/{attachid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/attachments/{attID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
@@ -457,121 +401,89 @@
     },
     {
         "編號": "GX",
-        "名稱": "",
+        "名稱": "代辦清單",
         "方法": "GET",
-        "路徑": "/api/cards/{cid}/checklist",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/checklist",
+        "備註": "可以整合到 取得卡片",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "POST",
-        "路徑": "/api/cards/{cid}/checklist",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/checklist",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "PUT",
-        "路徑": "/api/cards/{cid}/checklist/{checklistid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/checklist/{checklistID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/checklist/{checklistid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/checklist/{checklistID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
-        "名稱": "",
+        "名稱": "留言",
         "方法": "GET",
-        "路徑": "/api/cards/{cid}/comments",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/comments",
+        "備註": "可以整合到 取得卡片",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "POST",
-        "路徑": "/api/cards/{cid}/comments",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/comments",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "PUT",
-        "路徑": "/api/cards/{cid}/comments/{commentid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/comments/{commentID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/comments/{commentid}",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/comments/{commentID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "GX",
-        "名稱": "",
+        "名稱": "標籤",
         "方法": "POST",
-        "路徑": "/api/cards/{cid}/labels/{labelid}",
-        "備註": "- 卡片一開始的標籤，應該會在取得卡片內容時拿到？",
+        "路徑": "/api/cards/{cardID}/labels/{labelID}",
+        "備註": "可以整合到卡片修改\n- 卡片一開始的標籤，應該會在取得卡片內容時拿到？",
         "功能說明": ""
     },
     {
         "編號": "GX",
         "名稱": "",
         "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/labels/{labelid}",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "GX",
-        "名稱": "",
-        "方法": "",
-        "路徑": "？",
-        "備註": "列表那邊有移動卡片的功能嗎？",
-        "功能說明": ""
-    },
-    {
-        "編號": "GX",
-        "名稱": "",
-        "方法": "POST",
-        "路徑": "/api/cards/{cid}/date",
-        "備註": "- 卡片一開始的日期，應該會在取得卡片內容時拿到？",
-        "功能說明": "- Start Date\n- Due Date\n- Reminder"
-    },
-    {
-        "編號": "GX",
-        "名稱": "",
-        "方法": "PUT",
-        "路徑": "/api/cards/{cid}/date",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "GX",
-        "名稱": "",
-        "方法": "DELETE",
-        "路徑": "/api/cards/{cid}/date",
-        "備註": "",
+        "路徑": "/api/cards/{cardID}/labels/{labelID}",
+        "備註": "可以整合到卡片修改",
         "功能說明": ""
     },
     {
         "編號": "H1",
         "名稱": "重設密碼",
         "方法": "POST",
-        "路徑": "/api/user/{uid}/resetPassword",
+        "路徑": "/api/user/{userID}/resetPassword",
         "備註": "",
         "功能說明": "！尚無此功能 在個人profile裡面做重設密碼的動作"
     },
@@ -579,40 +491,16 @@
         "編號": "H2",
         "名稱": "個人檔案",
         "方法": "GET",
-        "路徑": "/api/user/{uid}",
+        "路徑": "/api/user/{userID}",
         "備註": "",
         "功能說明": "！尚無此功能"
-    },
-    {
-        "編號": "H3",
-        "名稱": "登出",
-        "方法": "POST",
-        "路徑": "/api/logout",
-        "備註": "",
-        "功能說明": ""
     },
     {
         "編號": "I1",
         "名稱": "搜尋卡片/列表",
         "方法": "GET",
-        "路徑": "/api/user/{uid}?q={query}",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "Z1",
-        "名稱": "錯誤管理",
-        "方法": "",
-        "路徑": "",
-        "備註": "",
-        "功能說明": ""
-    },
-    {
-        "編號": "",
-        "名稱": "首頁",
-        "方法": "",
-        "路徑": "",
-        "備註": "",
+        "路徑": "/api/user/{userID}?q={query}",
+        "備註": "/api/search",
         "功能說明": ""
     }
 ]
